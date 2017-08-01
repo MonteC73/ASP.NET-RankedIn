@@ -1,9 +1,12 @@
 ﻿using RatedIn.DAL;
 using RatedIn.Models;
 using System;
-using System.Data.Entity;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace RatedIn.Controllers
@@ -44,10 +47,21 @@ namespace RatedIn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,URL,Rating,Games")] Player player)
+        public ActionResult Create([Bind(Include = "Id,Name,Rating,Games,FilePaths")] Player player, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var photo = new FilePath()
+                    {
+                        FileName = System.IO.Path.GetFileName(upload.FileName),
+                        FileType = FileType.Photo,
+                        PlayerId = player.Id
+                    };
+                    player.FilePaths = new List<FilePath> {photo};
+                    upload.SaveAs(Path.Combine(Server.MapPath("~/files"), photo.FileName));
+                }
                 db.Players.Add(player);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -76,11 +90,29 @@ namespace RatedIn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,URL,Rating,Games")] Player player)
+        public ActionResult Edit([Bind(Include = "Id,Name,Rating,Games,FilePaths")] Player player, HttpPostedFileBase upload)
         {
+            var entityKey = db.Players.First(p => p.Id == player.Id);
+            Debug.WriteLine("Edit");
             if (ModelState.IsValid)
             {
-                db.Entry(player).State = EntityState.Modified;
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    Debug.WriteLine("Valid");
+                    var photo = new FilePath()
+                    {
+                        Id = player.FilePaths.FirstOrDefault().Id,
+                        FileName = System.IO.Path.GetFileName(upload.FileName),
+                        FileType = FileType.Photo,
+                        PlayerId = player.Id
+                    };
+                    player.FilePaths = new List<FilePath> { photo };
+                    upload.SaveAs(Path.Combine(Server.MapPath("~/files"), player.FilePaths.First().FileName));
+                }
+                Debug.WriteLine("Out {0}: {1}", player.Name, player.FilePaths.First().FileName);
+
+                db.Entry(db.Set<Player>().Find(entityKey)).CurrentValues.SetValues(player);
+                //db.Entry(player).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

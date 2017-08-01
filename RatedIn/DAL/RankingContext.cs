@@ -10,5 +10,6 @@ namespace RatedIn.DAL
         }
 
         public DbSet<Player> Players { get; set; }
+        public DbSet<FilePath> FilePaths { get; set; }
     }
 }

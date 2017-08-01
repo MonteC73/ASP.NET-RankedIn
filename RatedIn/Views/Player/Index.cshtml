@@ -15,7 +15,7 @@
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.URL)
+            @Html.DisplayNameFor(model => model.FilePaths)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Rating)
@@ -32,8 +32,17 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.URL)
+            @{
+                var url = "";
+                if (item.FilePaths.Count > 0)
+                {
+                    url = item.FilePaths.First().FileName;
+                }
+
+            }
+            <img src="~/files/@url" alt="" style="width: 10px; height: 10px;"/>
         </td>
+
         <td>
             @Html.DisplayFor(modelItem => item.Rating)
         </td>

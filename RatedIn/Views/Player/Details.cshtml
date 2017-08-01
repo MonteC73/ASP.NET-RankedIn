@@ -1,4 +1,7 @@
-﻿@model RatedIn.Models.Player
+﻿
+@using Microsoft.Ajax.Utilities
+@using RatedIn.Models
+@model RatedIn.Models.Player
 
 @{
     ViewBag.Title = "Details";
@@ -19,11 +22,18 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.URL)
+            Avatar
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.URL)
+            @{
+                var url = "";
+                if (Model.FilePaths.Count > 0)
+                {
+                    url = Model.FilePaths.First().FileName;
+                }
+            }
+            <img src="~/files/@url" alt="" style="width: 20px; height: 20px;" />
         </dd>
 
         <dt>
