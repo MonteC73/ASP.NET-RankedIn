@@ -28,7 +28,7 @@ namespace RatedIn.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Player player = db.Players.Find(id);
+            Players player = db.Players.Find(id);
             if (player == null)
             {
                 return HttpNotFound();
@@ -47,7 +47,7 @@ namespace RatedIn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Rating,Games,FilePaths")] Player player, HttpPostedFileBase upload)
+        public ActionResult Create([Bind(Include = "Id,Name,Rating,Games,FilePaths")] Players player, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
@@ -56,8 +56,7 @@ namespace RatedIn.Controllers
                     var photo = new FilePath()
                     {
                         FileName = System.IO.Path.GetFileName(upload.FileName),
-                        FileType = FileType.Photo,
-                        PlayerId = player.Id
+                        FileType = FileType.Img,
                     };
                     player.FilePaths = new List<FilePath> {photo};
                     upload.SaveAs(Path.Combine(Server.MapPath("~/files"), photo.FileName));
@@ -77,7 +76,7 @@ namespace RatedIn.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Player player = db.Players.Find(id);
+            Players player = db.Players.Find(id);
             if (player == null)
             {
                 return HttpNotFound();
@@ -90,7 +89,7 @@ namespace RatedIn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Rating,Games,FilePaths")] Player player, HttpPostedFileBase upload)
+        public ActionResult Edit([Bind(Include = "Id,Name,Rating,Games,FilePaths")] Players player, HttpPostedFileBase upload)
         {
             var entityKey = db.Players.First(p => p.Id == player.Id);
             Debug.WriteLine("Edit");
@@ -103,15 +102,14 @@ namespace RatedIn.Controllers
                     {
                         Id = player.FilePaths.FirstOrDefault().Id,
                         FileName = System.IO.Path.GetFileName(upload.FileName),
-                        FileType = FileType.Photo,
-                        PlayerId = player.Id
+                        FileType = FileType.Img,
                     };
                     player.FilePaths = new List<FilePath> { photo };
                     upload.SaveAs(Path.Combine(Server.MapPath("~/files"), player.FilePaths.First().FileName));
                 }
                 Debug.WriteLine("Out {0}: {1}", player.Name, player.FilePaths.First().FileName);
 
-                db.Entry(db.Set<Player>().Find(entityKey)).CurrentValues.SetValues(player);
+                db.Entry(db.Set<Players>().Find(entityKey)).CurrentValues.SetValues(player);
                 //db.Entry(player).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -126,7 +124,7 @@ namespace RatedIn.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Player player = db.Players.Find(id);
+            Players player = db.Players.Find(id);
             if (player == null)
             {
                 return HttpNotFound();
@@ -182,7 +180,7 @@ namespace RatedIn.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Player player = db.Players.Find(id);
+            Players player = db.Players.Find(id);
             db.Players.Remove(player);
             db.SaveChanges();
             return RedirectToAction("Index");

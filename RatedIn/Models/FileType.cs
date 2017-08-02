@@ -3,6 +3,6 @@ namespace RatedIn.Models
 {
     public enum FileType
     {
-        Avarar = 1, Photo
+        Avatar = 1, Img, Url
     }
 }

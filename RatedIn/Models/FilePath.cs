@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace RatedIn.Models
 {
     using System.ComponentModel.DataAnnotations;
@@ -8,6 +10,6 @@ namespace RatedIn.Models
         [StringLength(255)]
         public string FileName { get; set; }
         public FileType FileType { get; set; }
-        public int PlayerId { get; set; }
+        public ICollection<Players> Players { get; set; }
     }
 }

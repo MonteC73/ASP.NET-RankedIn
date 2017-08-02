@@ -1,12 +1,14 @@
-﻿@model RatedIn.Models.Player
+﻿
+@using Microsoft.Ajax.Utilities
+@using RatedIn.Models
+@model RatedIn.Models.Players
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Details";
 }
 
-<h2>Delete</h2>
+<h2>Details</h2>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>Player</h4>
     <hr />
@@ -20,11 +22,18 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FilePaths)
+            Avatar
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FilePaths)
+            @{
+                var url = "";
+                if (Model.FilePaths.Count > 0)
+                {
+                    url = Model.FilePaths.First().FileName;
+                }
+            }
+            <img src="~/files/@url" alt="" style="width: 20px; height: 20px;" />
         </dd>
 
         <dt>
@@ -44,13 +53,8 @@
         </dd>
 
     </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
 </div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
