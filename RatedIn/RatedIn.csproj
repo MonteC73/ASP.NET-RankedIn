@@ -161,10 +161,10 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Controllers\TournamentController.cs" />
     <Compile Include="DAL\RankingContext.cs" />
-    <Compile Include="DAL\RankingInitializer.cs" />
+    <Compile Include="DAL\RatedInInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -179,6 +179,10 @@
     <Compile Include="Migrations\201707311050096_FilePaths.cs" />
     <Compile Include="Migrations\201707311050096_FilePaths.Designer.cs">
       <DependentUpon>201707311050096_FilePaths.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708021305318_Tournaments.cs" />
+    <Compile Include="Migrations\201708021305318_Tournaments.Designer.cs">
+      <DependentUpon>201708021305318_Tournaments.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\FilePath.cs" />
@@ -263,7 +267,6 @@
     <Content Include="Views\Players\View.cshtml" />
     <Content Include="Views\Players\Game.cshtml" />
     <Content Include="Views\Tournament\Index.cshtml" />
-    <Content Include="Views\Player\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -285,6 +288,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707311050096_FilePaths.resx">
       <DependentUpon>201707311050096_FilePaths.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708021305318_Tournaments.resx">
+      <DependentUpon>201708021305318_Tournaments.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

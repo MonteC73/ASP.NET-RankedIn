@@ -1,9 +1,10 @@
 ﻿using RatedIn.Models;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace RatedIn.DAL
 {
-    public class RankingContext : DbContext
+    public class RankingContext : IdentityDbContext<ApplicationUser>
     {
         public RankingContext() : base("RankingContext")
         {

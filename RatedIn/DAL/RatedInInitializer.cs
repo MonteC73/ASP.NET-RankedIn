@@ -7,9 +7,9 @@ using System.Linq;
 
 namespace RatedIn.DAL
 {
-    public class RankingInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<RankingContext>
+    public class RatedInInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<ApplicationDbContext>
     {
-        protected override void Seed(RankingContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var passwordHash = new PasswordHasher();
@@ -62,6 +62,7 @@ namespace RatedIn.DAL
             players.ForEach(p => context.Players.Add(p));
             tournaments.ForEach(t => context.Tournaments.Add(t));
             context.SaveChanges();
+            base.Seed(context);
         }
     }
 }

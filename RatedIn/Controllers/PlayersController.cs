@@ -11,24 +11,30 @@ using System.Web.Mvc;
 
 namespace RatedIn.Controllers
 {
-    public class PlayerController : Controller
+    public class PlayersController : Controller
     {
-        private RankingContext db = new RankingContext();
+        private readonly ApplicationDbContext _context;
 
-        // GET: Player
-        public ActionResult Index()
+        public PlayersController()
         {
-            return View(db.Players.ToList());
+            _context = new ApplicationDbContext();
         }
 
-        // GET: Player/Details/5
+
+        // GET: Players
+        public ActionResult Index()
+        {
+            return View(_context.Players.ToList());
+        }
+
+        // GET: Players/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Players player = db.Players.Find(id);
+            Players player = _context.Players.Find(id);
             if (player == null)
             {
                 return HttpNotFound();
@@ -36,13 +42,13 @@ namespace RatedIn.Controllers
             return View(player);
         }
 
-        // GET: Player/Create
+        // GET: Players/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Player/Create
+        // POST: Players/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -61,22 +67,22 @@ namespace RatedIn.Controllers
                     player.FilePaths = new List<FilePath> {photo};
                     upload.SaveAs(Path.Combine(Server.MapPath("~/files"), photo.FileName));
                 }
-                db.Players.Add(player);
-                db.SaveChanges();
+                _context.Players.Add(player);
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             return View(player);
         }
 
-        // GET: Player/Edit/5
+        // GET: Players/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Players player = db.Players.Find(id);
+            var player = _context.Players.Find(id);
             if (player == null)
             {
                 return HttpNotFound();
@@ -84,14 +90,14 @@ namespace RatedIn.Controllers
             return View(player);
         }
 
-        // POST: Player/Edit/5
+        // POST: Players/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Rating,Games,FilePaths")] Players player, HttpPostedFileBase upload)
         {
-            var entityKey = db.Players.First(p => p.Id == player.Id);
+            var entityKey = _context.Players.First(p => p.Id == player.Id);
             Debug.WriteLine("Edit");
             if (ModelState.IsValid)
             {
@@ -100,7 +106,6 @@ namespace RatedIn.Controllers
                     Debug.WriteLine("Valid");
                     var photo = new FilePath()
                     {
-                        Id = player.FilePaths.FirstOrDefault().Id,
                         FileName = System.IO.Path.GetFileName(upload.FileName),
                         FileType = FileType.Img,
                     };
@@ -109,22 +114,21 @@ namespace RatedIn.Controllers
                 }
                 Debug.WriteLine("Out {0}: {1}", player.Name, player.FilePaths.First().FileName);
 
-                db.Entry(db.Set<Players>().Find(entityKey)).CurrentValues.SetValues(player);
-                //db.Entry(player).State = EntityState.Modified;
-                db.SaveChanges();
+                _context.Entry(_context.Set<Players>().Find(entityKey)).CurrentValues.SetValues(player);
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(player);
         }
 
-        // GET: Player/Delete/5
+        // GET: Players/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Players player = db.Players.Find(id);
+            var player = _context.Players.Find(id);
             if (player == null)
             {
                 return HttpNotFound();
@@ -134,7 +138,7 @@ namespace RatedIn.Controllers
 
         public ActionResult Game()
         {
-            var players = db.Players.OrderBy(p => Guid.NewGuid()).Take(15)
+            var players = _context.Players.OrderBy(p => Guid.NewGuid()).Take(15)
                                     .OrderBy(p => p.Games).Take(2);
 
             return View(players.ToList());
@@ -142,8 +146,8 @@ namespace RatedIn.Controllers
 
         public ActionResult UpdateRank(int won, int lost)
         {
-            var winner = db.Players.First(w => w.Id == won);
-            var looser = db.Players.First(w => w.Id == lost);
+            var winner = _context.Players.First(w => w.Id == won);
+            var looser = _context.Players.First(w => w.Id == lost);
 
             int KA = GetFactorK(winner.Rating);
             int KB = GetFactorK(looser.Rating);
@@ -161,12 +165,12 @@ namespace RatedIn.Controllers
             looser.Rating = RB;
             winner.Games += 1;
             looser.Games += 1;
-            db.SaveChanges();
+            _context.SaveChanges();
 
             return RedirectToAction("Game");
         }
 
-        public int GetFactorK(int elo)
+        protected int GetFactorK(int elo)
         {
             if (elo > 2400)
                 return 16;
@@ -175,14 +179,14 @@ namespace RatedIn.Controllers
             return 32;
         }
 
-        // POST: Player/Delete/5
+        // POST: Players/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Players player = db.Players.Find(id);
-            db.Players.Remove(player);
-            db.SaveChanges();
+            Players player = _context.Players.First(p => p.Id == id);
+            _context.Players.Remove(player);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -190,7 +194,7 @@ namespace RatedIn.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }

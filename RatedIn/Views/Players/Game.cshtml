@@ -8,7 +8,7 @@
 
 <h2>title</h2>
 
-<a href="@Url.Action("UpdateRank", "Player", new {won = Model[0].Id, lost = Model[1].Id})">
+<a href="@Url.Action("UpdateRank", "Players", new {won = Model[0].Id, lost = Model[1].Id})">
     <div style="display: inline-block" class="btn btn-default">
         <h4>@Html.DisplayFor(model => model[0].Name)</h4>
         <hr/>
@@ -31,7 +31,7 @@
 </a>
 
 
-<a href="@Url.Action("UpdateRank", "Player", new { won = Model[1].Id, lost = Model[0].Id })">
+<a href="@Url.Action("UpdateRank", "Players", new { won = Model[1].Id, lost = Model[0].Id })">
     <div style="display: inline-block" class="btn btn-default">
         <h4>@Html.DisplayFor(model => model[1].Name)</h4>
         <hr />
