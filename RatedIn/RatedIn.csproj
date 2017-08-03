@@ -184,7 +184,12 @@
     <Compile Include="Migrations\201708021305318_Tournaments.Designer.cs">
       <DependentUpon>201708021305318_Tournaments.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708031356346_Tournaments1.cs" />
+    <Compile Include="Migrations\201708031356346_Tournaments1.Designer.cs">
+      <DependentUpon>201708031356346_Tournaments1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Attendance.cs" />
     <Compile Include="Models\FilePath.cs" />
     <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -201,6 +206,7 @@
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\SendCodeViewModel.cs" />
+    <Compile Include="ViewModels\TournamentViewModel.cs" />
     <Compile Include="ViewModels\VerifyCodeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -268,6 +274,7 @@
     <Content Include="Views\Players\Game.cshtml" />
     <Content Include="Views\Tournament\Index.cshtml" />
     <Content Include="Views\Tournament\Game.cshtml" />
+    <Content Include="Views\Tournament\Tournament.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -292,6 +299,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708021305318_Tournaments.resx">
       <DependentUpon>201708021305318_Tournaments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708031356346_Tournaments1.resx">
+      <DependentUpon>201708031356346_Tournaments1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

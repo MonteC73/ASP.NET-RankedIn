@@ -1,8 +1,8 @@
-﻿using System;
+﻿using RatedIn.Models;
+using System;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using RatedIn.Models;
 
 namespace RatedIn.Controllers
 {
@@ -20,6 +20,68 @@ namespace RatedIn.Controllers
         {
             return View(_context.Tournaments.ToList());
         }
+
+        public ActionResult Tournament(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var tournament = _context.Tournaments.Find(id);
+            if (tournament == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tournament);
+        }
+
+        //// GET: Players/Create
+        //public ActionResult AddPlayer(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    var tournament = _context.Tournaments.Find(id);
+        //    if (tournament == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(tournament);
+        //}
+
+        //// POST: Players/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //public ActionResult AddPlayer([Bind(Include = "Id,Players")] Tournament tournament)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var currentPlayers = tournament.Players.ToList();
+        //        var players = _context.Players.ToList();
+        //        var answer = players.Except(currentPlayers);
+
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    return View(tournament);
+        //}
+
+        //[HttpPost]
+        //public ActionResult AddPlayer([Bind(Include = "Id,Players")] Tournament tournament)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var currentPlayers = tournament.Players.ToList();
+        //        var players = _context.Players.ToList();
+        //        var answer = players.Except(currentPlayers);
+
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    return View(tournament);
+        //}
 
         // GET: Tournaments/5
         public ActionResult Game(int? id)

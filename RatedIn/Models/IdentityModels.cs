@@ -1,9 +1,9 @@
-﻿using System.Data.Entity;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using RatedIn.DAL;
+using System.Data.Entity;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace RatedIn.Models
 {
@@ -24,6 +24,7 @@ namespace RatedIn.Models
         public DbSet<Players> Players { get; set; }
         public DbSet<FilePath> FilePaths { get; set; }
         public DbSet<Tournament> Tournaments { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -38,6 +39,16 @@ namespace RatedIn.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Tournament>()
+                .HasOptional(p => p.Players)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+
+            base.OnModelCreating(modelBuilder);
         }
 
     }
