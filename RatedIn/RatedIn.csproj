@@ -159,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
@@ -188,13 +189,25 @@
     <Compile Include="Migrations\201708031356346_Tournaments1.Designer.cs">
       <DependentUpon>201708031356346_Tournaments1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708071351473_AddAttendance.cs" />
+    <Compile Include="Migrations\201708071351473_AddAttendance.Designer.cs">
+      <DependentUpon>201708071351473_AddAttendance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708071407535_AddAttendance1.cs" />
+    <Compile Include="Migrations\201708071407535_AddAttendance1.Designer.cs">
+      <DependentUpon>201708071407535_AddAttendance1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708080830336_RenamePlayerModel.cs" />
+    <Compile Include="Migrations\201708080830336_RenamePlayerModel.Designer.cs">
+      <DependentUpon>201708080830336_RenamePlayerModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Attendance.cs" />
     <Compile Include="Models\FilePath.cs" />
     <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Players.cs" />
+    <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Tournament.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -279,6 +292,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="files\" />
+    <Folder Include="Views\Attendances\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -302,6 +316,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708031356346_Tournaments1.resx">
       <DependentUpon>201708031356346_Tournaments1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708071351473_AddAttendance.resx">
+      <DependentUpon>201708071351473_AddAttendance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708071407535_AddAttendance1.resx">
+      <DependentUpon>201708071407535_AddAttendance1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708080830336_RenamePlayerModel.resx">
+      <DependentUpon>201708080830336_RenamePlayerModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

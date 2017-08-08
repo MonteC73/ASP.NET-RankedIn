@@ -21,7 +21,7 @@ namespace RatedIn.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Players> Players { get; set; }
+        public DbSet<Player> Players { get; set; }
         public DbSet<FilePath> FilePaths { get; set; }
         public DbSet<Tournament> Tournaments { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
@@ -41,15 +41,20 @@ namespace RatedIn.Models
             return new ApplicationDbContext();
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Tournament>()
-                .HasOptional(p => p.Players)
-                .WithMany()
-                .WillCascadeOnDelete(false);
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    //modelBuilder.Entity<Tournament>()
+        //    //    .HasOptional(p => p.Player)
+        //    //    .WithMany()
+        //    //    .WillCascadeOnDelete(false);
 
-            base.OnModelCreating(modelBuilder);
-        }
+        //    //modelBuilder.Entity<Attendance>()
+        //    //    .HasRequired(t => t.Tournament)
+        //    //    .WithMany()
+        //    //    .WillCascadeOnDelete(false);
+
+        //    //base.OnModelCreating(modelBuilder);
+        //}
 
     }
 }

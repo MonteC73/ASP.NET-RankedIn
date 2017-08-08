@@ -6,7 +6,7 @@ namespace RatedIn.Models
     public class Attendance
     {
         public Tournament Tournament { get; set; }
-        public Players Player { get; set; }
+        public Player Player { get; set; }
 
         [Key]
         [Column(Order = 1)]

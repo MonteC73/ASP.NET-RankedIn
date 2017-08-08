@@ -21,20 +21,20 @@ namespace RatedIn.Controllers
         }
 
 
-        // GET: Players
+        // GET: Player
         public ActionResult Index()
         {
             return View(_context.Players.ToList());
         }
 
-        // GET: Players/Details/5
+        // GET: Player/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Players player = _context.Players.Find(id);
+            Player player = _context.Players.Find(id);
             if (player == null)
             {
                 return HttpNotFound();
@@ -42,18 +42,18 @@ namespace RatedIn.Controllers
             return View(player);
         }
 
-        // GET: Players/Create
+        // GET: Player/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Players/Create
+        // POST: Player/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Rating,Games,FilePaths")] Players player, HttpPostedFileBase upload)
+        public ActionResult Create([Bind(Include = "Id,Name,Rating,Games,FilePaths")] Player player, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +75,7 @@ namespace RatedIn.Controllers
             return View(player);
         }
 
-        // GET: Players/Edit/5
+        // GET: Player/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,12 +90,12 @@ namespace RatedIn.Controllers
             return View(player);
         }
 
-        // POST: Players/Edit/5
+        // POST: Player/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Rating,Games,FilePaths")] Players player, HttpPostedFileBase upload)
+        public ActionResult Edit([Bind(Include = "Id,Name,Rating,Games,FilePaths")] Player player, HttpPostedFileBase upload)
         {
             var entityKey = _context.Players.First(p => p.Id == player.Id);
             Debug.WriteLine("Edit");
@@ -114,14 +114,14 @@ namespace RatedIn.Controllers
                 }
                 Debug.WriteLine("Out {0}: {1}", player.Name, player.FilePaths.First().FileName);
 
-                _context.Entry(_context.Set<Players>().Find(entityKey)).CurrentValues.SetValues(player);
+                _context.Entry(_context.Set<Player>().Find(entityKey)).CurrentValues.SetValues(player);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(player);
         }
 
-        // GET: Players/Delete/5
+        // GET: Player/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -136,12 +136,12 @@ namespace RatedIn.Controllers
             return View(player);
         }
 
-        // POST: Players/Delete/5
+        // POST: Player/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Players player = _context.Players.First(p => p.Id == id);
+            Player player = _context.Players.First(p => p.Id == id);
             _context.Players.Remove(player);
             _context.SaveChanges();
             return RedirectToAction("Index");

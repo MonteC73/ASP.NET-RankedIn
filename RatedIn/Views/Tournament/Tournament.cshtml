@@ -1,4 +1,5 @@
-﻿@model RatedIn.Models.Tournament
+﻿@using Microsoft.Ajax.Utilities
+@model RatedIn.ViewModels.TournamentViewModel
 
 @{
     ViewBag.Title = "Tournament";
@@ -11,19 +12,19 @@
     <hr/>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.TournamentName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.TournamentName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AdminId)
+            @Html.DisplayNameFor(model => model.TournamentAdminId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AdminId)
+            @Html.DisplayFor(model => model.TournamentAdminId)
         </dd>
 
         <dt>
@@ -43,8 +44,21 @@
         </dd>
 
     </dl>
+    <dl class="dl-horizontal">
+        @foreach (var player in Model.Players.Where(player => player != null))
+        {
+            <dt>Player</dt>
+            <dd>
+                @player.Name
+            </dd>
+            <dt>Rating</dt>
+            <dd>@player.Rating</dd>
+        }
+
+    </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Add Player", "Attend", "Attendances", Model.TournamentId, 1 ) |
+    @Html.ActionLink("Edit", "Edit", new {id = Model.TournamentId}) |
     @Html.ActionLink("Back to List", "Index")
 </p>

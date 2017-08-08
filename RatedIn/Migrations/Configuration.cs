@@ -1,13 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using RatedIn.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RatedIn.Migrations
 {
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
 
     internal sealed class Configuration : DbMigrationsConfiguration<RatedIn.Models.ApplicationDbContext>
@@ -22,16 +21,16 @@ namespace RatedIn.Migrations
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var passwordHash = new PasswordHasher();
 
-            var players = new List<Players>
+            var players = new List<Player>
             {
-                new Players {Id = 1, Name = "Player_1", Games = 0, Rating = 1200},
-                new Players {Id = 2, Name = "Player_2", Games = 0, Rating = 1200},
-                new Players {Id = 3, Name = "Player_3", Games = 0, Rating = 1200},
-                new Players {Id = 4, Name = "Player_4", Games = 0, Rating = 1200},
-                new Players {Id = 5, Name = "Player_5", Games = 0, Rating = 1200},
-                new Players {Id = 6, Name = "Player_6", Games = 0, Rating = 1200},
-                new Players {Id = 7, Name = "Player_7", Games = 0, Rating = 1200},
-                new Players {Id = 8, Name = "Player_8", Games = 0, Rating = 1200}
+                new Player {Id = 1, Name = "Player_1", Games = 0, Rating = 1200},
+                new Player {Id = 2, Name = "Player_2", Games = 0, Rating = 1200},
+                new Player {Id = 3, Name = "Player_3", Games = 0, Rating = 1200},
+                new Player {Id = 4, Name = "Player_4", Games = 0, Rating = 1200},
+                new Player {Id = 5, Name = "Player_5", Games = 0, Rating = 1200},
+                new Player {Id = 6, Name = "Player_6", Games = 0, Rating = 1200},
+                new Player {Id = 7, Name = "Player_7", Games = 0, Rating = 1200},
+                new Player {Id = 8, Name = "Player_8", Games = 0, Rating = 1200}
             };
 
             var admin = new ApplicationUser { UserName = "Admin_1", Email = "admin@admin.net", PasswordHash = passwordHash.HashPassword("pass") };
@@ -67,8 +66,74 @@ namespace RatedIn.Migrations
                 }
             };
 
+            var attendances = new List<Attendance>
+            {
+                new Attendance
+                {
+                    PlayerId = 1,
+                    TournamentId = 1
+                },
+                new Attendance
+                {
+                    PlayerId = 2,
+                    TournamentId = 1
+                },
+                new Attendance
+                {
+                    PlayerId = 3,
+                    TournamentId = 1
+                },
+                new Attendance
+                {
+                    PlayerId = 4,
+                    TournamentId = 1
+                },
+                new Attendance
+                {
+                    PlayerId = 3,
+                    TournamentId = 2
+                },
+                new Attendance
+                {
+                    PlayerId = 4,
+                    TournamentId = 2
+                },
+                new Attendance
+                {
+                    PlayerId = 5,
+                    TournamentId = 2
+                },
+                new Attendance
+                {
+                    PlayerId = 6,
+                    TournamentId = 2
+                                },
+                new Attendance
+                {
+                    PlayerId = 3,
+                    TournamentId = 5
+                },
+                new Attendance
+                {
+                    PlayerId = 4,
+                    TournamentId = 6
+                },
+                new Attendance
+                {
+                    PlayerId = 5,
+                    TournamentId = 7
+                },
+                new Attendance
+                {
+                    PlayerId = 6,
+                    TournamentId = 8
+                }
+            };
+
             players.ForEach(p => context.Players.Add(p));
             tournaments.ForEach(t => context.Tournaments.Add(t));
+            attendances.ForEach(a => context.Attendances.Add(a));
+
             context.SaveChanges();
         }
     }

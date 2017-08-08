@@ -1,8 +1,12 @@
 ﻿using RatedIn.Models;
+using RatedIn.ViewModels;
 using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using WebGrease.Css.Extensions;
 
 namespace RatedIn.Controllers
 {
@@ -32,10 +36,27 @@ namespace RatedIn.Controllers
             {
                 return HttpNotFound();
             }
-            return View(tournament);
+
+            var attendaces = _context.Attendances.Where(a => a.TournamentId == id);
+            var players = _context.Attendances.Where(a => a.TournamentId == id)
+                .Select(a => a.Player)
+                .ToList();
+
+
+            var tournamentView = new TournamentViewModel
+            {
+                TournamentId = tournament.Id,
+                TournamentAdminId = tournament.AdminId,
+                StartDate = tournament.StartDate,
+                EndDate = tournament.EndDate,
+                TournamentName = tournament.Name,
+                Attendances = attendaces,
+                Players = players
+            };
+            return View(tournamentView);
         }
 
-        //// GET: Players/Create
+        //// GET: Player/Create
         //public ActionResult AddPlayer(int? id)
         //{
         //    if (id == null)
@@ -50,16 +71,16 @@ namespace RatedIn.Controllers
         //    return View(tournament);
         //}
 
-        //// POST: Players/Create
+        //// POST: Player/Create
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
-        //public ActionResult AddPlayer([Bind(Include = "Id,Players")] Tournament tournament)
+        //public ActionResult AddPlayer([Bind(Include = "Id,Player")] Tournament tournament)
         //{
         //    if (ModelState.IsValid)
         //    {
-        //        var currentPlayers = tournament.Players.ToList();
-        //        var players = _context.Players.ToList();
+        //        var currentPlayers = tournament.Player.ToList();
+        //        var players = _context.Player.ToList();
         //        var answer = players.Except(currentPlayers);
 
         //        return RedirectToAction("Index");
@@ -69,12 +90,12 @@ namespace RatedIn.Controllers
         //}
 
         //[HttpPost]
-        //public ActionResult AddPlayer([Bind(Include = "Id,Players")] Tournament tournament)
+        //public ActionResult AddPlayer([Bind(Include = "Id,Player")] Tournament tournament)
         //{
         //    if (ModelState.IsValid)
         //    {
-        //        var currentPlayers = tournament.Players.ToList();
-        //        var players = _context.Players.ToList();
+        //        var currentPlayers = tournament.Player.ToList();
+        //        var players = _context.Player.ToList();
         //        var answer = players.Except(currentPlayers);
 
         //        return RedirectToAction("Index");

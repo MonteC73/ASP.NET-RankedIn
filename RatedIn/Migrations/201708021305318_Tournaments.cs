@@ -18,7 +18,7 @@ namespace RatedIn.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Players",
+                "dbo.Player",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -51,7 +51,7 @@ namespace RatedIn.Migrations
                         FilePath_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.Players_Id, t.FilePath_Id })
-                .ForeignKey("dbo.Players", t => t.Players_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Player", t => t.Players_Id, cascadeDelete: true)
                 .ForeignKey("dbo.FilePaths", t => t.FilePath_Id, cascadeDelete: true)
                 .Index(t => t.Players_Id)
                 .Index(t => t.FilePath_Id);
@@ -60,15 +60,15 @@ namespace RatedIn.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.Players", "Tournament_Id", "dbo.Tournaments");
+            DropForeignKey("dbo.Player", "Tournament_Id", "dbo.Tournaments");
             DropForeignKey("dbo.PlayersFilePaths", "FilePath_Id", "dbo.FilePaths");
-            DropForeignKey("dbo.PlayersFilePaths", "Players_Id", "dbo.Players");
+            DropForeignKey("dbo.PlayersFilePaths", "Players_Id", "dbo.Player");
             DropIndex("dbo.PlayersFilePaths", new[] { "FilePath_Id" });
             DropIndex("dbo.PlayersFilePaths", new[] { "Players_Id" });
-            DropIndex("dbo.Players", new[] { "Tournament_Id" });
+            DropIndex("dbo.Player", new[] { "Tournament_Id" });
             DropTable("dbo.PlayersFilePaths");
             DropTable("dbo.Tournaments");
-            DropTable("dbo.Players");
+            DropTable("dbo.Player");
             DropTable("dbo.FilePaths");
         }
     }

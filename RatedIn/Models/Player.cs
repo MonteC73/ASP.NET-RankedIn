@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RatedIn.Models
 {
-    public class Players
+    public class Player
     {
         public int Id { get; set; }
         public string Name { get; set; }

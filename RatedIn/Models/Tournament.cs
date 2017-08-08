@@ -10,6 +10,6 @@ namespace RatedIn.Models
         public string AdminId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public ICollection<Players> Players { get; set; }
+        public ICollection<Player> Players { get; set; }
     }
 }

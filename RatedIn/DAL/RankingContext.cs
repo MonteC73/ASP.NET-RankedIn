@@ -10,7 +10,7 @@ namespace RatedIn.DAL
         {
         }
 
-        public DbSet<Players> Players { get; set; }
+        public DbSet<Player> Players { get; set; }
         public DbSet<FilePath> FilePaths { get; set; }
         public DbSet<Tournament> Tournaments { get; set; }
     }
