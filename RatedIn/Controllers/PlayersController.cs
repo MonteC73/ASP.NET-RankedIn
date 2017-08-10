@@ -57,19 +57,19 @@ namespace RatedIn.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (upload != null && upload.ContentLength > 0)
-                {
-                    var photo = new FilePath()
-                    {
-                        FileName = System.IO.Path.GetFileName(upload.FileName),
-                        FileType = FileType.Img,
-                    };
-                    player.FilePaths = new List<FilePath> {photo};
-                    upload.SaveAs(Path.Combine(Server.MapPath("~/files"), photo.FileName));
-                }
-                _context.Players.Add(player);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
+                //if (upload != null && upload.ContentLength > 0)
+                //{
+                //    var photo = new FilePath()
+                //    {
+                //        FileName = System.IO.Path.GetFileName(upload.FileName),
+                //        FileType = FileType.Img,
+                //    };
+                //    player.FilePaths = new List<FilePath> {photo};
+                //    upload.SaveAs(Path.Combine(Server.MapPath("~/files"), photo.FileName));
+                //}
+                //_context.Players.Add(player);
+                //_context.SaveChanges();
+                //return RedirectToAction("Index");
             }
 
             return View(player);
@@ -101,18 +101,18 @@ namespace RatedIn.Controllers
             Debug.WriteLine("Edit");
             if (ModelState.IsValid)
             {
-                if (upload != null && upload.ContentLength > 0)
-                {
-                    Debug.WriteLine("Valid");
-                    var photo = new FilePath()
-                    {
-                        FileName = System.IO.Path.GetFileName(upload.FileName),
-                        FileType = FileType.Img,
-                    };
-                    player.FilePaths = new List<FilePath> { photo };
-                    upload.SaveAs(Path.Combine(Server.MapPath("~/files"), player.FilePaths.First().FileName));
-                }
-                Debug.WriteLine("Out {0}: {1}", player.Name, player.FilePaths.First().FileName);
+                //if (upload != null && upload.ContentLength > 0)
+                //{
+                //    Debug.WriteLine("Valid");
+                //    var photo = new FilePath()
+                //    {
+                //        FileName = System.IO.Path.GetFileName(upload.FileName),
+                //        FileType = FileType.Img,
+                //    };
+                //    player.FilePaths = new List<FilePath> { photo };
+                //    upload.SaveAs(Path.Combine(Server.MapPath("~/files"), player.FilePaths.First().FileName));
+                //}
+                //Debug.WriteLine("Out {0}: {1}", player.Name, player.FilePaths.First().FileName);
 
                 _context.Entry(_context.Set<Player>().Find(entityKey)).CurrentValues.SetValues(player);
                 _context.SaveChanges();

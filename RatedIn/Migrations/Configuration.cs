@@ -38,6 +38,18 @@ namespace RatedIn.Migrations
             userManager.Create(admin);
             var adminId = userManager.Users.First(u => u.UserName.Equals("Admin_1")).Id;
 
+            var filePaths = new List<FilePath>
+            {
+                new FilePath {FileName = "red.bmp", PlayerId = 1, FileType = FileType.Avatar},
+                new FilePath {FileName = "black.bmp", PlayerId = 2, FileType = FileType.Avatar},
+                new FilePath {FileName = "blue.bmp", PlayerId = 3, FileType = FileType.Avatar},
+                new FilePath {FileName = "gray.bmp", PlayerId = 4, FileType = FileType.Avatar},
+                new FilePath {FileName = "green.bmp", PlayerId = 5, FileType = FileType.Avatar},
+                new FilePath {FileName = "navy.bmp", PlayerId = 6, FileType = FileType.Avatar},
+                new FilePath {FileName = "orange.bmp", PlayerId = 7, FileType = FileType.Avatar},
+                new FilePath {FileName = "purple.bmp", PlayerId = 8}
+            };
+
             var tournaments = new List<Tournament>
             {
                 new Tournament
@@ -110,27 +122,28 @@ namespace RatedIn.Migrations
                                 },
                 new Attendance
                 {
-                    PlayerId = 3,
-                    TournamentId = 5
-                },
-                new Attendance
-                {
-                    PlayerId = 4,
-                    TournamentId = 6
-                },
-                new Attendance
-                {
                     PlayerId = 5,
-                    TournamentId = 7
+                    TournamentId = 3
                 },
                 new Attendance
                 {
                     PlayerId = 6,
-                    TournamentId = 8
+                    TournamentId = 3
+                },
+                new Attendance
+                {
+                    PlayerId = 7,
+                    TournamentId = 3
+                },
+                new Attendance
+                {
+                    PlayerId = 8,
+                    TournamentId = 3
                 }
             };
 
             players.ForEach(p => context.Players.Add(p));
+            filePaths.ForEach(f => context.FilePaths.Add(f));
             tournaments.ForEach(t => context.Tournaments.Add(t));
             attendances.ForEach(a => context.Attendances.Add(a));
 

@@ -1,12 +1,10 @@
 ﻿using RatedIn.Models;
 using RatedIn.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using WebGrease.Css.Extensions;
 
 namespace RatedIn.Controllers
 {
@@ -41,7 +39,6 @@ namespace RatedIn.Controllers
             var players = _context.Attendances.Where(a => a.TournamentId == id)
                 .Select(a => a.Player)
                 .ToList();
-
 
             var tournamentView = new TournamentViewModel
             {
@@ -105,6 +102,8 @@ namespace RatedIn.Controllers
         //}
 
         // GET: Tournaments/5
+
+
         public ActionResult Game(int? id)
         {
             if (id == null)
@@ -117,13 +116,24 @@ namespace RatedIn.Controllers
                 return HttpNotFound();
             }
 
-            var players = tournament.Players.OrderBy(p => Guid.NewGuid()).Take(15)
-                                    .OrderBy(p => p.Games).Take(2);
+            var players = _context.Attendances.Where(a => a.TournamentId == id)
+                                  .Select(p => p.Player)
+                                  .Include(f => f.FilePaths)
+                                  .OrderBy(p => Guid.NewGuid()).Take(10)
+                                  .OrderBy(p => p.Games).Take(2)
+                                  .ToList();
+            
+            var gameView = new GameViewModel
+            {
+                TournamentId = tournament.Id,
+                Tournament = tournament,
+                Players = players
+            };
 
-            return View(players.ToList());
+            return View(gameView);
         }
 
-        public ActionResult UpdateRank(int won, int lost)
+        public ActionResult UpdateRank(int won, int lost, int tournamentId)
         {
             var winner = _context.Players.First(w => w.Id == won);
             var looser = _context.Players.First(w => w.Id == lost);
@@ -146,7 +156,7 @@ namespace RatedIn.Controllers
             looser.Games += 1;
             _context.SaveChanges();
 
-            return RedirectToAction("Game");
+            return RedirectToAction("Game", new {id = tournamentId});
         }
 
         protected int GetFactorK(int elo)

@@ -7,13 +7,13 @@ namespace RatedIn.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Tournaments1 : IMigrationMetadata
+    public sealed partial class FilePathRefactor1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Tournaments1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(FilePathRefactor1));
         
         string IMigrationMetadata.Id
         {
-            get { return "201708031356346_Tournaments1"; }
+            get { return "201708081432298_FilePathRefactor1"; }
         }
         
         string IMigrationMetadata.Source

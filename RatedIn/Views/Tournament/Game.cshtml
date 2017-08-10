@@ -1,49 +1,26 @@
-﻿@using RatedIn.Models
-@model List<Player>
-
-@{
-    Layout = "_Layout";
-}
+﻿@model RatedIn.ViewModels.GameViewModel
 
 <h2>Game</h2>
 
-<a href="@Url.Action("UpdateRank", "Tournament", new {won = Model[0].Id, lost = Model[1].Id})">
+<a href="@Url.Action("UpdateRank", "Tournament", new { won = Model.Players[0].Id, lost = Model.Players[1].Id, tournamentId = Model.TournamentId })">
     <div style="display: inline-block" class="btn btn-default">
-        <h4>@Html.DisplayFor(model => model[0].Name)</h4>
+        <h4>@Model.Players[0].Name</h4>
         <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                Avatar
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model[0].FilePaths)
-            </dd>
-
-            <dd>
-                <img src="~/files/@Model[0].FilePaths.First(f => f.FileType == FileType.Img).FileName" alt="" />
-            </dd>
-
-        </dl>
-        @Html.ActionLink("Vote!", "UpdateRank", new { won = Model[0].Id, lost = Model[1].Id })
+        <div>
+            <img src="~/files/@Model.Players[0].FilePaths.First().FileName" alt="" />
+        </div>
+        @Html.ActionLink("Vote!", "UpdateRank", new { won = Model.Players[0].Id, lost = Model.Players[1].Id, tournamentId = Model.TournamentId })
     </div>
 </a>
 
-
-<a href="@Url.Action("UpdateRank", "Tournament", new {won = Model[1].Id, lost = Model[0].Id})">
+<a href="@Url.Action("UpdateRank", "Tournament", new { won = Model.Players[1].Id, lost = Model.Players[0].Id, tournamentId = Model.TournamentId })">
     <div style="display: inline-block" class="btn btn-default">
-        <h4>@Html.DisplayFor(model => model[1].Name)</h4>
+        <h4>@Model.Players[1].Name</h4>
         <hr/>
-        <dl class="dl-horizontal">
-            <dt>
-                Avatar
-            </dt>
-
-            <dd>
-                <img src="~/files/@Model[1].FilePaths.First(f => f.FileType == FileType.Img).FileName" alt=""/>
-            </dd>
-        </dl>
-        @Html.ActionLink("Vote!", "UpdateRank", new {won = Model[1].Id, lost = Model[0].Id})
+        <div>
+            <img src="~/files/@Model.Players[1].FilePaths.First().FileName" alt="" />
+        </div>
+        @Html.ActionLink("Vote!", "UpdateRank", new { won = Model.Players[1].Id, lost = Model.Players[0].Id, tournamentId = Model.TournamentId })
     </div>
 </a>
 <p>

@@ -1,4 +1,5 @@
 ﻿
+
 using System.Collections.Generic;
 
 namespace RatedIn.Models
@@ -9,6 +10,7 @@ namespace RatedIn.Models
         public string Name { get; set; }
         public int Rating { get; set; }
         public int Games { get; set; }
-        public virtual ICollection<FilePath> FilePaths { get; set; }
+
+        public ICollection<FilePath> FilePaths { get; set; }
     }
 }

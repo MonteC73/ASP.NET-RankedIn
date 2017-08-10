@@ -169,37 +169,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201707271042395_InitialCreate.cs" />
-    <Compile Include="Migrations\201707271042395_InitialCreate.Designer.cs">
-      <DependentUpon>201707271042395_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201707271209136_AddPlayer.cs" />
-    <Compile Include="Migrations\201707271209136_AddPlayer.Designer.cs">
-      <DependentUpon>201707271209136_AddPlayer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201707311050096_FilePaths.cs" />
-    <Compile Include="Migrations\201707311050096_FilePaths.Designer.cs">
-      <DependentUpon>201707311050096_FilePaths.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708021305318_Tournaments.cs" />
-    <Compile Include="Migrations\201708021305318_Tournaments.Designer.cs">
-      <DependentUpon>201708021305318_Tournaments.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708031356346_Tournaments1.cs" />
-    <Compile Include="Migrations\201708031356346_Tournaments1.Designer.cs">
-      <DependentUpon>201708031356346_Tournaments1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708071351473_AddAttendance.cs" />
-    <Compile Include="Migrations\201708071351473_AddAttendance.Designer.cs">
-      <DependentUpon>201708071351473_AddAttendance.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708071407535_AddAttendance1.cs" />
-    <Compile Include="Migrations\201708071407535_AddAttendance1.Designer.cs">
-      <DependentUpon>201708071407535_AddAttendance1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708080830336_RenamePlayerModel.cs" />
-    <Compile Include="Migrations\201708080830336_RenamePlayerModel.Designer.cs">
-      <DependentUpon>201708080830336_RenamePlayerModel.cs</DependentUpon>
+    <Compile Include="Migrations\201708100809213_Recreate.cs" />
+    <Compile Include="Migrations\201708100809213_Recreate.Designer.cs">
+      <DependentUpon>201708100809213_Recreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Attendance.cs" />
@@ -215,6 +187,7 @@
     <Compile Include="ViewModels\ExternalLoginListViewModel.cs" />
     <Compile Include="ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="ViewModels\ForgotViewModel.cs" />
+    <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\ResetPasswordViewModel.cs" />
@@ -283,8 +256,6 @@
     <Content Include="Views\Players\Details.cshtml" />
     <Content Include="Views\Players\Edit.cshtml" />
     <Content Include="Views\Players\Index.cshtml" />
-    <Content Include="Views\Players\View.cshtml" />
-    <Content Include="Views\Players\Game.cshtml" />
     <Content Include="Views\Tournament\Index.cshtml" />
     <Content Include="Views\Tournament\Game.cshtml" />
     <Content Include="Views\Tournament\Tournament.cshtml" />
@@ -302,29 +273,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201707271042395_InitialCreate.resx">
-      <DependentUpon>201707271042395_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707271209136_AddPlayer.resx">
-      <DependentUpon>201707271209136_AddPlayer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707311050096_FilePaths.resx">
-      <DependentUpon>201707311050096_FilePaths.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708021305318_Tournaments.resx">
-      <DependentUpon>201708021305318_Tournaments.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708031356346_Tournaments1.resx">
-      <DependentUpon>201708031356346_Tournaments1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708071351473_AddAttendance.resx">
-      <DependentUpon>201708071351473_AddAttendance.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708071407535_AddAttendance1.resx">
-      <DependentUpon>201708071407535_AddAttendance1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708080830336_RenamePlayerModel.resx">
-      <DependentUpon>201708080830336_RenamePlayerModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201708100809213_Recreate.resx">
+      <DependentUpon>201708100809213_Recreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
