@@ -43,13 +43,13 @@ namespace RatedIn.Models
 
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{
-        //    //modelBuilder.Entity<Tournament>()
+        //    //modelBuilder.Entity<Details>()
         //    //    .HasOptional(p => p.Player)
         //    //    .WithMany()
         //    //    .WillCascadeOnDelete(false);
 
         //    //modelBuilder.Entity<Attendance>()
-        //    //    .HasRequired(t => t.Tournament)
+        //    //    .HasRequired(t => t.Details)
         //    //    .WithMany()
         //    //    .WillCascadeOnDelete(false);
 

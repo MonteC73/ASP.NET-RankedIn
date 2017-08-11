@@ -10,10 +10,10 @@ namespace RatedIn.ViewModels
         public int TournamentId { get; set; }
 
         
-        [DisplayName("Tournament Name")]
+        [DisplayName("Details Name")]
         public string TournamentName { get; set; }
 
-        [DisplayName("Tournament Admin")]
+        [DisplayName("Details Admin")]
         public string TournamentAdminId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

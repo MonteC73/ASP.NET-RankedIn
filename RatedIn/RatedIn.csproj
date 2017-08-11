@@ -258,7 +258,7 @@
     <Content Include="Views\Players\Index.cshtml" />
     <Content Include="Views\Tournament\Index.cshtml" />
     <Content Include="Views\Tournament\Game.cshtml" />
-    <Content Include="Views\Tournament\Tournament.cshtml" />
+    <Content Include="Views\Tournament\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

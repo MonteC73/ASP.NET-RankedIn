@@ -17,13 +17,13 @@ namespace RatedIn.Controllers
             _context = new ApplicationDbContext();
         }
 
-        // GET: Tournament
+        // GET: Details
         public ActionResult Index()
         {
             return View(_context.Tournaments.ToList());
         }
 
-        public ActionResult Tournament(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -72,7 +72,7 @@ namespace RatedIn.Controllers
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
-        //public ActionResult AddPlayer([Bind(Include = "Id,Player")] Tournament tournament)
+        //public ActionResult AddPlayer([Bind(Include = "Id,Player")] Details tournament)
         //{
         //    if (ModelState.IsValid)
         //    {
@@ -87,7 +87,7 @@ namespace RatedIn.Controllers
         //}
 
         //[HttpPost]
-        //public ActionResult AddPlayer([Bind(Include = "Id,Player")] Tournament tournament)
+        //public ActionResult AddPlayer([Bind(Include = "Id,Player")] Details tournament)
         //{
         //    if (ModelState.IsValid)
         //    {
@@ -122,7 +122,8 @@ namespace RatedIn.Controllers
                                   .OrderBy(p => Guid.NewGuid()).Take(10)
                                   .OrderBy(p => p.Games).Take(2)
                                   .ToList();
-            
+
+
             var gameView = new GameViewModel
             {
                 TournamentId = tournament.Id,
